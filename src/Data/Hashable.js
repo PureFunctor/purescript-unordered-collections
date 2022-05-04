@@ -4,7 +4,7 @@
 
 "use strict";
 
-exports.hashNumber = function (o) {
+export function hashNumber(o) {
     if (o !== o || o === Infinity) {
         return 0;
     }
@@ -17,12 +17,12 @@ exports.hashNumber = function (o) {
         h ^= o;
     }
     return h;
-};
+}
 
-exports.hashString = function (s) {
+export function hashString(s) {
     var h = 0;
     for (var i = 0; i < s.length; i++) {
         h = (31 * h + s.charCodeAt(i)) | 0;
     }
     return h;
-};
+}

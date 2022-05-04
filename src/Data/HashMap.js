@@ -764,15 +764,15 @@ function insert2remove1(a, insertIndex, v1, v2, removeIndex) {
 
 var empty = new MapNode(0,0,[]);
 
-exports.empty = empty;
+export {empty};
 
-exports.lookupPurs = function (Nothing, Just, keyEquals, key, keyHash) {
+export function lookupPurs(Nothing, Just, keyEquals, key, keyHash) {
     return function (m) {
         return m.lookup(Nothing, Just, keyEquals, key, keyHash, 0);
     };
-};
+}
 
-exports.fromArrayPurs = function (keyEquals, hashFunction) {
+export function fromArrayPurs(keyEquals, hashFunction) {
     return function (kf) {
         return function (vf) {
             return function (a) {
@@ -786,9 +786,9 @@ exports.fromArrayPurs = function (keyEquals, hashFunction) {
             };
         };
     };
-};
+}
 
-exports.insertPurs = function (keyEquals, hashFunction) {
+export function insertPurs(keyEquals, hashFunction) {
     return function (key) {
         return function (value) {
             return function (m) {
@@ -796,9 +796,9 @@ exports.insertPurs = function (keyEquals, hashFunction) {
             };
         };
     };
-};
+}
 
-exports.insertWithPurs = function (keyEquals, hashFunction) {
+export function insertWithPurs(keyEquals, hashFunction) {
     return function (f) {
         return function (key) {
             return function (value) {
@@ -808,73 +808,72 @@ exports.insertWithPurs = function (keyEquals, hashFunction) {
             };
         };
     };
-};
+}
 
-exports.deletePurs = function (keyEquals, key, keyHash) {
+export function deletePurs(keyEquals, key, keyHash) {
     return function (m) {
         return m.delet(keyEquals, key, keyHash, 0);
     };
-};
+}
 
-exports.unionWithPurs = function (eq, hash, f) {
+export function unionWithPurs(eq, hash, f) {
     return function (l) {
         return function (r) {
             return l.unionWith(eq, hash, f, r, 0);
         };
     };
-};
+}
 
-exports.intersectionWithPurs = function (Nothing, Just, eq, hash, f) {
+export function intersectionWithPurs(Nothing, Just, eq, hash, f) {
     return function (l) {
         return function (r) {
             return l.intersectionWith(Nothing, Just, eq, hash, f, r, 0);
         };
     };
-};
+}
 
-exports.toArrayBy = function (f) {
+export function toArrayBy(f) {
     return function (m) {
         var res = [];
         m.toArrayBy(f, res);
         return res;
     };
-};
+}
 
-exports.debugShow = function (m) {
+export function debugShow(m) {
     return JSON.stringify(m);
 }
 
-exports.singletonPurs = function (k) {
+export function singletonPurs(k) {
     return function (keyHash) {
         return function (v) {
             return new MapNode(1 << (keyHash & 31), 0, [k, v]);
         };
     };
-};
+}
 
-exports.eqPurs = function (keq, veq) {
+export function eqPurs(keq, veq) {
     return function (a) {
         return function (b) {
             return a.eq(keq, veq, b);
         };
     };
-};
+}
 
 function isEmpty (m) {
     return m.datamap === 0 && m.nodemap === 0;
 }
 
-exports.isEmpty = isEmpty;
+export {isEmpty};
+export function size(m) { return m.size(); }
 
-exports.size = function (m) { return m.size(); }
-
-exports.mapWithIndexPurs = function (f) {
+export function mapWithIndexPurs(f) {
     return function (m) {
         return m.imap(f);
     };
-};
+}
 
-exports.foldMapWithIndexPurs = function (mempty) {
+export function foldMapWithIndexPurs(mempty) {
     return function (mappend) {
         return function (f) {
             return function (m) {
@@ -882,9 +881,9 @@ exports.foldMapWithIndexPurs = function (mempty) {
             };
         };
     };
-};
+}
 
-exports.traverseWithIndexPurs = function (pure) {
+export function traverseWithIndexPurs(pure) {
     return function (apply) {
         return function (f) {
             return function (m) {
@@ -892,21 +891,21 @@ exports.traverseWithIndexPurs = function (pure) {
             };
         };
     };
-};
+}
 
-exports.hashPurs = function (vhash) {
+export function hashPurs(vhash) {
     return function (m) {
         return m.hash(vhash);
     };
-};
+}
 
-exports.filterWithKey = function (f) {
+export function filterWithKey(f) {
     return function (m) {
         return m.filterWithKey(f);
     };
-};
+}
 
-exports.nubHashPurs = function (Nothing, Just, eq, hash) {
+export function nubHashPurs(Nothing, Just, eq, hash) {
     return function (a) {
         var m = new MapNode(0,0,[]);
         var r = [];
@@ -920,4 +919,4 @@ exports.nubHashPurs = function (Nothing, Just, eq, hash) {
         }
         return r;
     };
-};
+}
